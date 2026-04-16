@@ -1,0 +1,24 @@
+[Unit]
+Description=Cloudflare DDNS Update Service
+Documentation=https://github.com/yourusername/cf-ddns
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+
+# 原生安全配置：由 Systemd 自动创建并管理 /var/lib/cf-ddns 缓存目录
+# 确保权限始终严格锁定为 0700，无需手动 mkdir 且兼容高强度沙箱
+StateDirectory=cf-ddns
+StateDirectoryMode=0700
+
+# The {{CONFIG_PATH}} variable is automatically templated by install.sh
+ExecStart=/usr/local/bin/cf-ddns-update {{CONFIG_PATH}}
+
+# Security hardening (防止该服务进程越权修改系统文件)
+ProtectSystem=full
+ProtectHome=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
