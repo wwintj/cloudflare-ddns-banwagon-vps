@@ -1,0 +1,28 @@
+# secrets / env
+.env
+*.env
+*.local
+/etc/cf-ddns/*.env
+
+# logs
+*.log
+logs/
+var/log/
+*.out
+
+# cache / runtime
+*.cache
+*.pid
+tmp/
+.var/
+ /var/lib/cf-ddns/
+
+# editor / os
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# bash history / misc
+*.swp
+*.bak
