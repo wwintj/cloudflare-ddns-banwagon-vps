@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer for Cloudflare DDNS Update
+
+[Timer]
+# Interval will be templated during installation
+OnBootSec=2min
+OnUnitActiveSec={{INTERVAL}}min
+RandomizedDelaySec=10
+
+[Install]
+WantedBy=timers.target
